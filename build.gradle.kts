@@ -2,3 +2,7 @@
 plugins {
     alias(libs.plugins.androidApplication) apply false
 }
+
+ext{
+    //roomVersion = "2.6.1"
+}

@@ -4,6 +4,8 @@
 
     <item android:title="Add sample data"
         android:id = "@+id/sample"/>
-    <item android:title="Item"
-        android:id = "@+id/item"/>
+
+    <!-- optional code for excursion list if implemented, see VacationList -->
+    <!-- <item android:title="View excursions"
+        android:id = "@+id/seeExcursions"/> -->
 </menu>
