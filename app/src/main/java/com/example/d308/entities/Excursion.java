@@ -9,12 +9,18 @@ public class Excursion {
     private int excursionID;
     private String excursionName;
     private double excursionPrice;
+    public String excursionDate;
     private int vacationID;
 
-    public Excursion(int excursionID, String excursionName, double excursionPrice, int vacationID) { //Code -> Generate: Constructor
+    public Excursion(int excursionID,
+                     String excursionName,
+                     double excursionPrice,
+                     String excursionDate,
+                     int vacationID) { //Code -> Generate: Constructor
         this.excursionID = excursionID;
         this.excursionName = excursionName;
         this.excursionPrice = excursionPrice;
+        this.excursionDate = excursionDate;
         this.vacationID = vacationID;
     }
 
@@ -48,5 +54,13 @@ public class Excursion {
 
     public void setVacationID(int vacationID) {
         this.vacationID = vacationID;
+    }
+
+    public String getExcursionDate() {
+        return excursionDate;
+    }
+
+    public void setExcursionDate(String eDate) {
+        this.excursionDate = eDate;
     }
 }

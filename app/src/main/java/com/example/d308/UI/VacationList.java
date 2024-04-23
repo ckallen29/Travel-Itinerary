@@ -98,6 +98,7 @@ public class VacationList extends AppCompatActivity {
                     0,
                     "Tour",
                     50.0,
+                    "12/03/24",
                     1);
             repository.insert(excursion);
 
@@ -137,7 +138,7 @@ public class VacationList extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         vacationAdapter.setVacations(allVacations);
-
+        vacationAdapter.notifyDataSetChanged();
         //Toast.makeText(VacationDetails.this,"refresh list",Toast.LENGTH_LONG).show();
     }
 

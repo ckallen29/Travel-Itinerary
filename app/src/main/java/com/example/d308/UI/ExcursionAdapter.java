@@ -20,11 +20,16 @@ public class ExcursionAdapter extends RecyclerView.Adapter<ExcursionAdapter.Excu
     private final Context context;
     private final LayoutInflater mInflater;
 
-    class ExcursionViewHolder extends RecyclerView.ViewHolder {
+    public ExcursionAdapter(Context context) {
+        mInflater = LayoutInflater.from(context);
+        this.context = context;
+    }
+
+    public class ExcursionViewHolder extends RecyclerView.ViewHolder { //added public
         private final TextView excursionItemView;
         private final TextView excursionItemView2;
 
-        private ExcursionViewHolder(View itemView) {
+        public ExcursionViewHolder(@NonNull View itemView) { //changed from private
             super(itemView);
 
             excursionItemView = itemView.findViewById(R.id.textExcursionListItem); //from excursion_list_item
@@ -40,17 +45,13 @@ public class ExcursionAdapter extends RecyclerView.Adapter<ExcursionAdapter.Excu
                     intent.putExtra("id", current.getExcursionID());
                     intent.putExtra("name", current.getExcursionName());
                     intent.putExtra("price", current.getExcursionPrice());
+                    intent.putExtra("date", current.getExcursionDate());
                     intent.putExtra("vacationID", current.getVacationID());
 
                     context.startActivity(intent);
                 }
             });
         }
-    }
-
-    public ExcursionAdapter(Context context) {
-        mInflater = LayoutInflater.from(context);
-        this.context = context;
     }
 
     @NonNull

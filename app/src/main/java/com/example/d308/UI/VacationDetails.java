@@ -268,6 +268,10 @@ public class VacationDetails extends AppCompatActivity {
                 this.finish();
             }
         }
+        if (item.getItemId() == android.R.id.home) {
+            this.finish(); //go back to parent activity
+            return true;
+        }
         return true;
     }
 
@@ -278,8 +282,12 @@ public class VacationDetails extends AppCompatActivity {
         super.onResume();
 
         List<Excursion> filteredExcursions = repository.getAssociatedExcursions(vacationID);
+
         RecyclerView recyclerView = findViewById(R.id.excursionRecyclerView);
         final ExcursionAdapter excursionAdapter = new ExcursionAdapter(this);
+        recyclerView.setAdapter(excursionAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         excursionAdapter.setExcursions(filteredExcursions);
         excursionAdapter.notifyDataSetChanged();
     }
@@ -288,6 +296,7 @@ public class VacationDetails extends AppCompatActivity {
         String myFormat = "MM/dd/yy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
+        vacationStartDate = sdf.format(vStartCalendar.getTime());
         buttonVacationDateStart.setText(sdf.format(vStartCalendar.getTime()));
     }
 
@@ -295,6 +304,7 @@ public class VacationDetails extends AppCompatActivity {
         String endFormat = "MM/dd/yy";
         SimpleDateFormat sdfEnd = new SimpleDateFormat(endFormat, Locale.US);
 
+        vacationEndDate = sdfEnd.format(vEndCalendar.getTime());
         buttonVacationDateEnd.setText(sdfEnd.format(vEndCalendar.getTime()));
     }
 }
