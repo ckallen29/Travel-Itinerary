@@ -37,11 +37,13 @@ public class ExcursionDetails extends AppCompatActivity {
     String excursionName;
     double excursionPrice;
     String excursionDate;
+    String excursionNote;
     int excursionID;
     int vacationID;
     Button buttonExcursionDate;
     DatePickerDialog.OnDateSetListener eDate;
     final Calendar eCalendar = Calendar.getInstance();
+    EditText editExcursionNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +55,19 @@ public class ExcursionDetails extends AppCompatActivity {
 
         editExcursionName = findViewById(R.id.editExcursionName);
         editExcursionPrice = findViewById(R.id.editExcursionPrice);
+        editExcursionNote = findViewById(R.id.editExcursionNote);
 
         excursionName = getIntent().getStringExtra("name");
         excursionPrice = getIntent().getDoubleExtra("price", 0.0);
         excursionID = getIntent().getIntExtra("id", -1);
         vacationID = getIntent().getIntExtra("vacationID", -1); //retrieve from VacationDetails
+        Log.d("VacationID", "VacationID is: " + vacationID);
         excursionDate = getIntent().getStringExtra("date");
+        excursionNote = getIntent().getStringExtra("note");
 
         editExcursionName.setText(excursionName);
         editExcursionPrice.setText(Double.toString(excursionPrice));
+        editExcursionNote.setText(excursionNote);
 
         buttonExcursionDate = findViewById(R.id.buttonExcursionDate);
         String myFormat = "MM/dd/yy";
@@ -99,8 +105,11 @@ public class ExcursionDetails extends AppCompatActivity {
                 eCalendar.set(Calendar.YEAR, year);
                 eCalendar.set(Calendar.MONTH, month);
                 eCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                String myFormat = "MM/dd/yy";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
                 updateLabel();
-                Log.d("updateLabel()", "Value of excursionDate: " + excursionDate);
+                //Log.d("updateLabel()", "Value of excursionDate: " + excursionDate);
             }
         };
 
@@ -130,6 +139,7 @@ public class ExcursionDetails extends AppCompatActivity {
                         editExcursionName.getText().toString(),
                         Double.parseDouble(editExcursionPrice.getText().toString()),
                         excursionDate,
+                        editExcursionNote.getText().toString(),
                         vacationID
                 );
                 repository.insert(excursion);
@@ -140,6 +150,7 @@ public class ExcursionDetails extends AppCompatActivity {
                         editExcursionName.getText().toString(),
                         Double.parseDouble(editExcursionPrice.getText().toString()),
                         excursionDate,
+                        editExcursionNote.getText().toString(),
                         vacationID
                 );
                 repository.update(excursion);
@@ -156,6 +167,7 @@ public class ExcursionDetails extends AppCompatActivity {
                         editExcursionName.getText().toString(),
                         Double.parseDouble(editExcursionPrice.getText().toString()),
                         excursionDate,
+                        editExcursionNote.getText().toString(),
                         vacationID
                 );
                 repository.delete(excursion);
@@ -163,13 +175,13 @@ public class ExcursionDetails extends AppCompatActivity {
             }
         }
         if (item.getItemId() == R.id.excursionshare) {
-            /*Intent sentIntent = new Intent();
+            Intent sentIntent = new Intent();
             sentIntent.setAction(Intent.ACTION_SEND);
-            sentIntent.putExtra(Intent.EXTRA_TEXT, editNote.getText().toString()+ "EXTRA_TEXT");
-            sentIntent.putExtra(Intent.EXTRA_TITLE, editNote.getText().toString()+ "EXTRA_TITLE");
+            sentIntent.putExtra(Intent.EXTRA_TEXT, editExcursionNote.getText().toString()+ "EXTRA_TEXT"); //remove extra text
+            sentIntent.putExtra(Intent.EXTRA_TITLE, editExcursionNote.getText().toString()+ "EXTRA_TITLE"); //remove extra text
             sentIntent.setType("text/plain");
             Intent shareIntent=Intent.createChooser(sentIntent, null);
-            startActivity(shareIntent);*/
+            startActivity(shareIntent);
             return true;
         }
         if (item.getItemId()==R.id.excursionnotify) {
@@ -188,7 +200,7 @@ public class ExcursionDetails extends AppCompatActivity {
         String myFormat = "MM/dd/yy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        excursionDate = sdf.format(eCalendar.getTime());
+        excursionDate = sdf.format(eCalendar.getTime()); //this updates the value stored in the repo object!!
         buttonExcursionDate.setText(sdf.format(eCalendar.getTime()));
     }
 }

@@ -14,5 +14,5 @@
         android:title="Notify Excursion" />
     <item
         android:id="@+id/excursionshare"
-        android:title="Share Excursion" />
+        android:title="Share Note" />
 </menu>

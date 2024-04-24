@@ -10,17 +10,20 @@ public class Excursion {
     private String excursionName;
     private double excursionPrice;
     public String excursionDate;
+    public String excursionNote;
     private int vacationID;
 
     public Excursion(int excursionID,
                      String excursionName,
                      double excursionPrice,
                      String excursionDate,
+                     String excursionNote,
                      int vacationID) { //Code -> Generate: Constructor
         this.excursionID = excursionID;
         this.excursionName = excursionName;
         this.excursionPrice = excursionPrice;
         this.excursionDate = excursionDate;
+        this.excursionNote = excursionNote;
         this.vacationID = vacationID;
     }
 
@@ -62,5 +65,13 @@ public class Excursion {
 
     public void setExcursionDate(String eDate) {
         this.excursionDate = eDate;
+    }
+
+    public String getExcursionNote() {
+        return excursionNote;
+    }
+
+    public void setExcursionNote(String note) {
+        this.excursionNote = note;
     }
 }

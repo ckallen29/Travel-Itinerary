@@ -99,6 +99,7 @@ public class VacationList extends AppCompatActivity {
                     "Tour",
                     50.0,
                     "12/03/24",
+                    "Enter note here",
                     1);
             repository.insert(excursion);
 

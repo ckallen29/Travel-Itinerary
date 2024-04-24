@@ -67,6 +67,7 @@ public class VacationDetails extends AppCompatActivity {
 
         //get values from intent extras
         vacationID = getIntent().getIntExtra("id", -1);
+        Log.d("vacationID", "VacationID is: " + vacationID);
         vacationName = getIntent().getStringExtra("name");
         vacationPrice = getIntent().getDoubleExtra("price", 0.0);
         vacationHotel = getIntent().getStringExtra("hotel");
@@ -282,6 +283,7 @@ public class VacationDetails extends AppCompatActivity {
         super.onResume();
 
         List<Excursion> filteredExcursions = repository.getAssociatedExcursions(vacationID);
+        Log.d("filteredExcursions", "List of excursions: " + filteredExcursions);
 
         RecyclerView recyclerView = findViewById(R.id.excursionRecyclerView);
         final ExcursionAdapter excursionAdapter = new ExcursionAdapter(this);
