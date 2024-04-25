@@ -76,6 +76,7 @@ public class VacationDetails extends AppCompatActivity {
         vacationHotel = getIntent().getStringExtra("hotel");
         vacationStartDate = getIntent().getStringExtra("start");
         vacationEndDate = getIntent().getStringExtra("end");
+        Log.d("vacationStartDate", "start date is " + vacationStartDate);
 
         //set text of editText fields to data passed from intent extras
         editVacationName.setText(vacationName);
@@ -92,6 +93,7 @@ public class VacationDetails extends AppCompatActivity {
             vStartCalendar.setTime(new Date()); //set start calendar to current date
             vacationStartDate = sdf.format(vStartCalendar.getTime()); //update value
             buttonVacationDateStart.setText(vacationStartDate);
+            //getIntent().putExtra("start", vacationStartDate);
         }
 
         buttonVacationDateStart.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +126,7 @@ public class VacationDetails extends AppCompatActivity {
                     Toast.makeText(VacationDetails.this, "End date cannot be after end date", Toast.LENGTH_SHORT).show();
                     vStartCalendar.setTime(vEndCalendar.getTime());
                 } else {
-                    vacationStartDate = new SimpleDateFormat("MM/dd/yy", Locale.US).format(vEndCalendar.getTime());
+                    vacationStartDate = new SimpleDateFormat("MM/dd/yy", Locale.US).format(vStartCalendar.getTime());
                     buttonVacationDateStart.setText(vacationStartDate);
                     updateStartLabel();
                 }
@@ -140,6 +142,7 @@ public class VacationDetails extends AppCompatActivity {
             vEndCalendar.setTime(new Date());
             vacationEndDate = sdfEnd.format(vEndCalendar.getTime());
             buttonVacationDateEnd.setText(vacationEndDate);
+            //getIntent().putExtra("end", vacationEndDate);
         }
 
         buttonVacationDateEnd.setOnClickListener(new View.OnClickListener() {
@@ -185,7 +188,10 @@ public class VacationDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(VacationDetails.this, ExcursionDetails.class);
-                intent.putExtra("vacationID", vacationID); //pass vacationID to ExcursionDetails
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("vacationID", vacationID);
+                intent.putExtra("start", vacationStartDate);
+                intent.putExtra("end", vacationEndDate);
 
                 startActivity(intent);
             }

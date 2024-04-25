@@ -68,11 +68,12 @@ public class ExcursionAdapter extends RecyclerView.Adapter<ExcursionAdapter.Excu
             Excursion current = mExcursions.get(position);
             String name = current.getExcursionName();
             int vacationID = current.getVacationID(); //filter by vacation ID
+            String date = current.getExcursionDate();
             holder.excursionItemView.setText(name);
-            holder.excursionItemView2.setText(Integer.toString(vacationID));
+            holder.excursionItemView2.setText(date);
         } else {
             holder.excursionItemView.setText("No excursion name");
-            holder.excursionItemView2.setText("No vacation ID");
+            holder.excursionItemView2.setText("No date set");
         }
     }
 

@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,6 +44,8 @@ public class ExcursionDetails extends AppCompatActivity {
     String excursionNote;
     int excursionID;
     int vacationID;
+    String startDate;
+    String endDate;
     Button buttonExcursionDate;
     DatePickerDialog.OnDateSetListener eDate;
     final Calendar eCalendar = Calendar.getInstance();
@@ -63,8 +66,10 @@ public class ExcursionDetails extends AppCompatActivity {
         excursionName = getIntent().getStringExtra("name");
         excursionPrice = getIntent().getDoubleExtra("price", 0.0);
         excursionID = getIntent().getIntExtra("id", -1);
-        vacationID = getIntent().getIntExtra("vacationID", -1); //retrieve from VacationDetails
-        Log.d("VacationID", "VacationID is: " + vacationID);
+        vacationID = getIntent().getIntExtra("vacationID", -1);
+        Log.d("Vacation ID", "Vacation ID is " + vacationID);
+        //startDate = getIntent().getStringExtra("start"); //passes null, WHAT THE FUCK
+        //endDate = getIntent().getStringExtra("end");
         excursionDate = getIntent().getStringExtra("date");
         excursionNote = getIntent().getStringExtra("note");
 
@@ -72,13 +77,27 @@ public class ExcursionDetails extends AppCompatActivity {
         editExcursionPrice.setText(Double.toString(excursionPrice));
         editExcursionNote.setText(excursionNote);
 
+        Vacation vacation = repository.getVacationById(vacationID);
+        if (vacation != null) {
+            startDate = vacation.getVacationStartDate();
+            endDate = vacation.getVacationEndDate();
+        }
+        Log.d("Start Date", "Start date is " + startDate);
+        Log.d("End Date", "End date is " + endDate);
+
         buttonExcursionDate = findViewById(R.id.buttonExcursionDate);
         String myFormat = "MM/dd/yy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         buttonExcursionDate.setText(excursionDate);
 
         if (excursionDate == null) {
-            eCalendar.setTime(new Date());
+            Date defaultDate;
+            try {
+                defaultDate = sdf.parse(startDate);
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+            eCalendar.setTime(defaultDate);
             excursionDate = sdf.format(eCalendar.getTime());
             buttonExcursionDate.setText(excursionDate);
         }
@@ -108,10 +127,29 @@ public class ExcursionDetails extends AppCompatActivity {
                 eCalendar.set(Calendar.YEAR, year);
                 eCalendar.set(Calendar.MONTH, month);
                 eCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                String myFormat = "MM/dd/yy";
-                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                Date startDateConv;
+                try {
+                    startDateConv = sdf.parse(startDate);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+                Date endDateConv;
+                try {
+                    endDateConv = sdf.parse(endDate);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+                //String myFormat = "MM/dd/yy";
+                //SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-                updateLabel();
+                //compare to vacation dates
+                if (eCalendar.getTime().before(startDateConv) || eCalendar.getTime().after(endDateConv)) {
+                    Toast.makeText(ExcursionDetails.this, "Date cannot be outside vacation dates", Toast.LENGTH_SHORT).show();
+                } else {
+                    updateLabel();
+                }
+
+                //updateLabel();
                 //Log.d("updateLabel()", "Value of excursionDate: " + excursionDate);
             }
         };

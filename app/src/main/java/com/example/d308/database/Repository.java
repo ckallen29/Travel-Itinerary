@@ -140,4 +140,14 @@ public class Repository {
 
         return mAllExcursions;
     }
+
+    public Vacation getVacationById(int vacationID) {
+        List<Vacation> allVacations = getmAllVacations();
+        for (Vacation vacation : allVacations) {
+            if (vacation.getVacationID() == vacationID) {
+                return vacation;
+            }
+        }
+        return null;
+    }
 }

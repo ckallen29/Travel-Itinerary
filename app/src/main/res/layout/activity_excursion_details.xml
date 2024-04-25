@@ -109,7 +109,8 @@
                         android:id="@+id/editExcursionNote"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:padding="10dp" />
+                        android:padding="10dp"
+                        android:hint="Add a note here"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
