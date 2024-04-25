@@ -67,7 +67,7 @@ public class ExcursionDetails extends AppCompatActivity {
         excursionPrice = getIntent().getDoubleExtra("price", 0.0);
         excursionID = getIntent().getIntExtra("id", -1);
         vacationID = getIntent().getIntExtra("vacationID", -1);
-        Log.d("Vacation ID", "Vacation ID is " + vacationID);
+        //Log.d("Vacation ID", "Vacation ID is " + vacationID);
         //startDate = getIntent().getStringExtra("start"); //passes null, WHAT THE FUCK
         //endDate = getIntent().getStringExtra("end");
         excursionDate = getIntent().getStringExtra("date");
@@ -82,8 +82,8 @@ public class ExcursionDetails extends AppCompatActivity {
             startDate = vacation.getVacationStartDate();
             endDate = vacation.getVacationEndDate();
         }
-        Log.d("Start Date", "Start date is " + startDate);
-        Log.d("End Date", "End date is " + endDate);
+        //Log.d("Start Date", "Start date is " + startDate);
+        //Log.d("End Date", "End date is " + endDate);
 
         buttonExcursionDate = findViewById(R.id.buttonExcursionDate);
         String myFormat = "MM/dd/yy";
@@ -105,7 +105,7 @@ public class ExcursionDetails extends AppCompatActivity {
         buttonExcursionDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Date date;
+                //Date date;
                 String info = buttonExcursionDate.getText().toString();
                 try {
                     eCalendar.setTime(sdf.parse(info));

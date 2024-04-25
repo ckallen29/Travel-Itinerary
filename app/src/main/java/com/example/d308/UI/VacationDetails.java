@@ -99,7 +99,7 @@ public class VacationDetails extends AppCompatActivity {
         buttonVacationDateStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Date date;
+                //Date date;
                 String info = buttonVacationDateStart.getText().toString(); //get button text
                 try {
                     vStartCalendar.setTime(sdf.parse(info)); //parse info into a date object
@@ -148,7 +148,7 @@ public class VacationDetails extends AppCompatActivity {
         buttonVacationDateEnd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Date date;
+                //Date date;
                 String info = buttonVacationDateEnd.getText().toString(); //get button text
                 try {
                     vEndCalendar.setTime(sdfEnd.parse(info)); //parse info into a date object
