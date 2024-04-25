@@ -6,4 +6,13 @@
     <item
         android:id="@+id/vacationdelete"
         android:title="Delete Vacation" />
+    <item
+        android:id="@+id/vacationshare"
+        android:title="Share Vacation" />
+    <item
+        android:id="@+id/vacationstartalert"
+        android:title="Vacation Start Alert" />
+    <item
+        android:id="@+id/vacationendalert"
+        android:title="Vacation End Alert" />
 </menu>

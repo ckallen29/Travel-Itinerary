@@ -1,6 +1,9 @@
 package com.example.d308.UI;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -177,15 +180,35 @@ public class ExcursionDetails extends AppCompatActivity {
         if (item.getItemId() == R.id.excursionshare) {
             Intent sentIntent = new Intent();
             sentIntent.setAction(Intent.ACTION_SEND);
-            sentIntent.putExtra(Intent.EXTRA_TEXT, editExcursionNote.getText().toString()+ "EXTRA_TEXT"); //remove extra text
-            sentIntent.putExtra(Intent.EXTRA_TITLE, editExcursionNote.getText().toString()+ "EXTRA_TITLE"); //remove extra text
+            sentIntent.putExtra(Intent.EXTRA_TEXT, editExcursionNote.getText().toString() + "EXTRA_TEXT"); //remove extra text
+            sentIntent.putExtra(Intent.EXTRA_TITLE, editExcursionNote.getText().toString() + "EXTRA_TITLE"); //remove extra text
             sentIntent.setType("text/plain");
-            Intent shareIntent=Intent.createChooser(sentIntent, null);
+            Intent shareIntent = Intent.createChooser(sentIntent, null);
             startActivity(shareIntent);
             return true;
         }
         if (item.getItemId()==R.id.excursionnotify) {
+            String dateFromScreen = excursionDate;
+            String myFormat = "MM/dd/yy";
+            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+            Date myDate = null;
 
+            try {
+                myDate = sdf.parse(dateFromScreen);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            Long trigger = myDate.getTime();
+
+            //broadcast receiver sends the notification
+            Intent intent = new Intent(ExcursionDetails.this, MyReceiver.class); //intent to send
+            intent.setAction("exc action");
+            intent.putExtra("key", excursionName + " is today!"); //notification message
+            PendingIntent sender = PendingIntent.getBroadcast(ExcursionDetails.this, ++MainActivity.numAlert, intent, PendingIntent.FLAG_IMMUTABLE); //increments from 0 for the whole app every alert
+            //alarm service wakes up the app to send the notification
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
 
             return true;
         }
