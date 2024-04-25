@@ -2,8 +2,8 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Add sample data"
-        android:id = "@+id/sample"/>
+    <!-- <item android:title="Add sample data"
+        android:id = "@+id/sample"/> -->
 
     <!-- optional code for excursion list if implemented, see VacationList -->
     <!-- <item android:title="View excursions"

@@ -72,7 +72,7 @@ public class VacationList extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.sample) {
+        /*if (item.getItemId() == R.id.sample) {
             repository = new Repository(getApplication());
             //Toast.makeText(VacationList.this, "Add sample data", Toast.LENGTH_LONG).show();
             Vacation vacation = new Vacation(
@@ -104,7 +104,7 @@ public class VacationList extends AppCompatActivity {
 
             onResume();
             return true;
-        }
+        }*/
 
         //optional if statement if excursion list is implemented
         //if implemented, uncomment code in menu_vacation_list
