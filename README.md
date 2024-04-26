@@ -8,3 +8,4 @@ To operate, tap the "Begin" button to open the app and view all data stored on y
 ## ANDROID VERSION
 
 ## GIT REPOSITORY
+https://gitlab.com/wgu-gitlab-environment/student-repos/call688/d308-mobile-application-development-android.git
